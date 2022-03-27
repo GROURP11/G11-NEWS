@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news1/helper/data.dart';
 import 'package:news1/model/article_model.dart';
 import 'package:news1/model/category_model.dart';
 import 'package:news1/helper/news.dart';
+import 'package:news1/views/article_view.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -45,7 +47,7 @@ class _HomeState extends State<Home> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("G10 ", style: TextStyle(color: Colors.blueGrey)),
+            Text("G11 ", style: TextStyle(color: Colors.blueGrey)),
             Text(
               "NEWS",
               style: TextStyle(color: Colors.black),
@@ -54,46 +56,51 @@ class _HomeState extends State<Home> {
         ),
         elevation: 0.0,
       ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            /* NEW CATEGORIES */
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              height: 70,
-              child: ListView.builder(
-                  itemCount: categories.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return CategoryTile(
-                      imageUrl: categories[index].imageUrl,
-                      categoryName: categories[index].categoryName,
-                    );
-                  }),
-            ),
-            /* NEWS BLOCKS */
-            _loading
-                ? Center(
-                    child: Container(
-                      child: CircularProgressIndicator(),
-                    ),
-                  )
-                : SingleChildScrollView(
-                    child: Container(
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: <Widget>[
+              /* NEW CATEGORIES */
+              Container(
+                //padding: EdgeInsets.symmetric(horizontal: 16),
+                height: 70,
+                child: ListView.builder(
+                    itemCount: categories.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return CategoryTile(
+                        imageUrl: categories[index].imageUrl,
+                        categoryName: categories[index].categoryName,
+                      );
+                    }),
+              ),
+              /* CIRCULAR PROGRESS INDICATOR */
+              _loading
+                  ? Center(
+                      child: Container(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  /* NEWS BLOCKS */
+                  : Container(
                       child: ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.only(top: 16),
                           itemCount: articles.length,
                           shrinkWrap: true,
+                          //physics: ClampingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return BlogTile(
-                              imageUrl: articles[index].urlToImage,
-                              title: articles[index].title,
-                              desc: articles[index].description,
-                            );
+                                imageUrl: articles[index].urlToImage,
+                                title: articles[index].title,
+                                desc: articles[index].description,
+                                url: articles[index].url);
                           }),
-                    ),
-                  )
-          ],
+                    )
+            ],
+          ),
         ),
       ),
     );
@@ -119,9 +126,9 @@ class CategoryTile extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: Image.network(
-                imageUrl,
+              borderRadius: BorderRadius.circular(10),
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
                 width: 120,
                 height: 60,
                 fit: BoxFit.cover,
@@ -153,19 +160,53 @@ class CategoryTile extends StatelessWidget {
 // block tile
 class BlogTile extends StatelessWidget {
   //const BlogTile({Key? key}) : super(key: key);
-  final String? imageUrl, title, desc;
+  final String? imageUrl, title, desc, url;
   BlogTile(
-      {@required this.imageUrl, @required this.title, @required this.desc});
+      {@required this.imageUrl,
+      @required this.title,
+      @required this.desc,
+      @required this.url});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
-      children: <Widget>[
-        Image.network(imageUrl!),
-        Text(title!),
-        Text(desc!),
-      ],
-    ));
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ArticleView(
+                      imageUrl: url,
+                    )));
+      },
+      child: Container(
+          margin: EdgeInsets.only(bottom: 16),
+          child: Column(
+            children: <Widget>[
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: Image.network(imageUrl!)),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                title!,
+                style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                desc!,
+                style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          )),
+    );
   }
 }
