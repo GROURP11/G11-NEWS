@@ -1,16 +1,16 @@
-# news1
+# G11 NEWS
 
-A new Flutter project.
+A course work project for CSC3112 - Principles of Programming.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is is a news feed application done by group 11.
+Its intended to demonstrate the knowledge acquired from CSC3112.
 
-A few resources to get you started if this is your first Flutter project:
+## Group 11 Members
+1. Timothy Amio
+2. Pamela Natukunda
+3. Marvin Joshua Chelengat
+4. Andrew Joram Granger
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
