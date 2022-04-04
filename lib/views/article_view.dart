@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_android/src/android_webview.pigeon.dart';
 
 class ArticleView extends StatefulWidget {
   final String? blogUrl;
+  //ArticleView({this.blogUrl, String? imageUrl});
   ArticleView({this.blogUrl, String? imageUrl});
   //const ArticleView({Key? key}) : super(key: key);
 
@@ -38,13 +40,16 @@ class _ArticleViewState extends State<ArticleView> {
                 child: Icon(Icons.save)),
           )
         ],
+        centerTitle: true,
         elevation: 0.0,
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
+        // if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
         child: WebView(
           initialUrl: widget.blogUrl,
+          //javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: ((WebViewController webViewController) {
             _completer.complete(webViewController);
           }),
