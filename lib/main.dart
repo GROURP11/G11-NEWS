@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news1/views/home.dart';
+import '/views/home.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +13,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: Colors.white,
-      ),
-      home: Home(),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primaryColor: Colors.white,
+        ),
+        home: AnimatedSplashScreen(
+            splash: Icons.newspaper_sharp,
+            duration: 3000,
+            splashTransition: SplashTransition.slideTransition,
+            backgroundColor: Colors.blueGrey,
+            nextScreen: Home()));
   }
 }

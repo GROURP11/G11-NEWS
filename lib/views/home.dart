@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
               screen = selectedScreen;
             });
           },
-          height: 70,
+          height: 50,
           backgroundColor: Colors.black,
           animationDuration: const Duration(milliseconds: 300),
         ),
