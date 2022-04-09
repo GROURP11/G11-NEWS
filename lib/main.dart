@@ -13,15 +13,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primaryColor: Colors.white,
-        ),
-        home: AnimatedSplashScreen(
-            splash: Icons.newspaper_sharp,
-            duration: 3000,
-            splashTransition: SplashTransition.slideTransition,
-            backgroundColor: Colors.blueGrey,
-            nextScreen: Home()));
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primaryColor: Colors.white,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: AnimatedSplashScreen(
+          splash: Icons.newspaper_sharp,
+          duration: 3000,
+          splashTransition: SplashTransition.scaleTransition,
+          /* backgroundColor: Colors.blueGrey, */
+          nextScreen: Home()),
+    );
   }
 }

@@ -8,7 +8,7 @@ import 'package:news1/model/category_model.dart';
 import 'package:news1/helper/news.dart';
 import 'package:news1/views/article_view.dart'; */
 import 'package:news1/views/localnews.dart';
-import 'package:news1/views/weather.dart';
+import 'package:news1/views/weatherPage.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -21,8 +21,8 @@ class _HomeState extends State<Home> {
   /* bottom navigatio items */
 
   final items = const [
-    Icon(Icons.home, size: 30),
     Icon(Icons.newspaper_outlined, size: 30),
+    Icon(Icons.home, size: 30),
     Icon(Icons.nights_stay, size: 30),
   ];
 
@@ -76,7 +76,7 @@ class _HomeState extends State<Home> {
         widget = const LocalNews();
         break;
       case 2:
-        widget = const Weather();
+        widget = const WeatherPage();
         break;
       default:
         widget = const GlobalNews();
