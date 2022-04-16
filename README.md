@@ -1,4 +1,4 @@
-# G11 NEWS
+# G10 NEWS
 
 A course work project for CSC3112 - Principles of Programming.
 
@@ -11,6 +11,7 @@ Its intended to demonstrate the knowledge acquired from CSC3112.
 1. Timothy Amio
 2. Pamela Natukunda
 3. Marvin Joshua Chelengat
-4. Andrew Joram Granger
+4. Odok Simon Peter
+5. Andrew Joram Kiyemba
 
 
