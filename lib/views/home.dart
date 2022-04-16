@@ -70,10 +70,10 @@ class _HomeState extends State<Home> {
     Widget widget;
     switch (screen) {
       case 0:
-        widget = const GlobalNews();
+        widget = const LocalNews();
         break;
       case 1:
-        widget = const LocalNews();
+        widget = const GlobalNews();
         break;
       case 2:
         widget = const WeatherPage();
